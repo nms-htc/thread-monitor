@@ -5,6 +5,9 @@
  */
 package com.nms.tm.ui;
 
+import java.awt.EventQueue;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cuong
@@ -37,6 +40,11 @@ public class ThreadMonitor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("NMS Thread Monitor");
         setIconImage((new javax.swing.ImageIcon(getClass().getClassLoader().getResource("com/nms/tm/image/monitor.png"))).getImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         toolBar.setFloatable(false);
 
@@ -46,6 +54,11 @@ public class ThreadMonitor extends javax.swing.JFrame {
         addConnBtn.setFocusable(false);
         addConnBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         addConnBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        addConnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addConnBtnActionPerformed(evt);
+            }
+        });
         toolBar.add(addConnBtn);
 
         aboutBtn.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("com/nms/tm/image/sign-info.png")));
@@ -79,7 +92,16 @@ public class ThreadMonitor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        openAddConnDialog();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void addConnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConnBtnActionPerformed
+        openAddConnDialog();
+    }//GEN-LAST:event_addConnBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,6 +137,14 @@ public class ThreadMonitor extends javax.swing.JFrame {
             }
         });
     }
+    
+    protected void openAddConnDialog() {
+        if (this.addConnDialog == null) {
+            this.addConnDialog = new AddConnectionDialog(this, true);
+        }
+        this.addConnDialog.open();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutBtn;
@@ -125,4 +155,7 @@ public class ThreadMonitor extends javax.swing.JFrame {
     private javax.swing.JToolBar toolBar;
     private javax.swing.JScrollPane treeScrollPane;
     // End of variables declaration//GEN-END:variables
+    
+    //  "Add Connection" Dialog
+    private AddConnectionDialog addConnDialog;
 }
