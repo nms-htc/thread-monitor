@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}2015 Next Generation Mobile Service JSC., (NMS).
+${licensePrefix}All rights reserved.
+<#if licenseLast??>
+${licenseLast}
+</#if>
